@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc">
+  <title id="title">Couple photo placeholder</title>
+  <desc id="desc">A soft neutral framed placeholder for a future couple photograph.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#efe2d4"/>
+      <stop offset="1" stop-color="#dbc7b4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="850" fill="url(#bg)"/>
+  <rect x="30" y="30" width="1140" height="790" rx="25" fill="none" stroke="#a95d62" stroke-width="2" opacity=".6"/>
+  <g fill="none" stroke="#8a6b5d" stroke-width="3" opacity=".75">
+    <circle cx="600" cy="375" r="102"/>
+    <path d="M415 635c28-135 117-203 185-203s157 68 185 203"/>
+  </g>
+  <text x="600" y="700" text-anchor="middle" fill="#5b4540" font-family="Georgia, serif" font-size="28" letter-spacing="7">COUPLE PHOTO PLACEHOLDER</text>
+</svg>
