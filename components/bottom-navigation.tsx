@@ -34,10 +34,19 @@ export function BottomNavigation({ translation: t }: { translation: Translation 
 
     if (audio.muted) {
       audio.muted = false;
+      audio.volume = 0.55;
+      audio.currentTime = 0;
+
+      try {
+        await audio.play();
+      } catch {
+        audio.load();
+        await audio.play().catch(() => {
+          // Some browsers still refuse playback until the next user gesture.
+        });
+      }
+
       setIsMuted(false);
-      await audio.play().catch(() => {
-        // Ignore if browser blocks autoplay.
-      });
       return;
     }
 
