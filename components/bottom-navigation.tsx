@@ -6,7 +6,7 @@ import type { Translation } from "@/data/translations";
 
 export function BottomNavigation({ translation: t }: { translation: Translation }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const links = [
     { href: "#invitation", label: t.navInvitation, icon: Heart },
@@ -21,11 +21,8 @@ export function BottomNavigation({ translation: t }: { translation: Translation 
 
     audio.loop = true;
     audio.volume = 0.55;
-    audio.muted = false;
-
-    audio.play().catch(() => {
-      // Autoplay is blocked until the user interacts with the page.
-    });
+    audio.muted = true;
+    audio.pause();
   }, []);
 
   const toggleMusic = async () => {
