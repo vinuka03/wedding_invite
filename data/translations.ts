@@ -56,8 +56,8 @@ export const translations = {
     photoAlt: "Placeholder for Kavindi and Gamindu's couple photograph",
     photoPlaceholder: "Couple photo placeholder",
     requiredName: "Please enter your name before continuing.",
-    rsvpMessage: (name: string, guests: string, message: string) =>
-      `Wedding RSVP\n\nName: ${name}\nNumber of Guests: ${guests}\n\nMessage:\n${message || "—"}`,
+    rsvpMessage: (name: string, message: string) =>
+      `Wedding RSVP\n\nName: ${name}\n\nMessage:\n${message || "—"}`,
   },
   si: {
     brideName: "කවින්දි",
@@ -116,8 +116,8 @@ export const translations = {
     photoAlt: "කවින්දි සහ ගාමින්දුගේ යුවළ ඡායාරූපය සඳහා තාවකාලික ස්ථානය",
     photoPlaceholder: "යුවළගේ ඡායාරූපය සඳහා ස්ථානය",
     requiredName: "කරුණාකර ඉදිරියට යාමට පෙර ඔබේ නම ඇතුළත් කරන්න.",
-    rsvpMessage: (name: string, guests: string, message: string) =>
-      `විවාහ උත්සවයට පැමිණීම තහවුරු කිරීම\n\nනම: ${name}\nපැමිණෙන සංඛ්‍යාව: ${guests}\n\nපණිවිඩය:\n${message || "—"}`,
+    rsvpMessage: (name: string, message: string) =>
+      `විවාහ උත්සවයට පැමිණීම තහවුරු කිරීම\n\nනම: ${name}\n\nපණිවිඩය:\n${message || "—"}`,
   },
 } as const;
 

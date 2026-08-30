@@ -138,23 +138,7 @@ export function InvitationPage({ locale }: { locale: Locale }) {
         </Reveal>
       </section>
 
-      <section className="px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <SectionHeading eyebrow={t.contactsEyebrow} title={t.contactsTitle} />
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              {contacts.map((contact) => (
-                <a key={contact.phone} href={`tel:${contact.phone}`} className="group rounded-2xl border border-line p-5 transition hover:border-rose hover:bg-rose/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose focus-visible:ring-offset-2">
-                  <Phone className="size-5 text-rose" aria-hidden="true" />
-                  <p className="mt-5 font-display text-2xl">{contact.name}</p>
-                  <p className="mt-1 text-sm text-ink/65">{localizedPhone(contact.phone)}</p>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-rose">{t.call} {contact.name}</p>
-                </a>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+
 
       <section id="rsvp" className="scroll-mt-4 border-y border-line bg-champagne/75 px-5 py-12 sm:px-8 sm:py-16">
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -163,6 +147,24 @@ export function InvitationPage({ locale }: { locale: Locale }) {
           </SectionHeading>
           <RsvpForm locale={locale} />
         </Reveal>
+
+        <div>
+          <div className="mx-auto max-w-3xl pt-10">
+            <Reveal>
+              <SectionHeading eyebrow={t.contactsEyebrow} title={t.contactsTitle} />
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
+                {contacts.map((contact) => (
+                    <a key={contact.phone} href={`tel:${contact.phone}`} className="group rounded-2xl border border-line p-5 transition hover:border-rose hover:bg-rose/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose focus-visible:ring-offset-2">
+                      <Phone className="size-5 text-rose" aria-hidden="true" />
+                      <p className="mt-5 font-display text-2xl">{contact.name}</p>
+                      <p className="mt-1 text-sm text-ink/65">{localizedPhone(contact.phone)}</p>
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-rose">{t.call} {contact.name}</p>
+                    </a>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
       <footer className="px-5 py-10 text-center sm:px-8">
