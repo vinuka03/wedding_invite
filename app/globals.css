@@ -160,9 +160,156 @@ body { margin: 0; min-width: 320px; background: #fbf4e6; }
   100% { transform: translate3d(12px, -38px, 0) scale(1.15); opacity: 0.16; }
 }
 
+/* ===== Letter Intro (door-split) ===== */
+
+.letter-stage-wrapper {
+  position: relative;
+  width: clamp(260px, 78vw, 400px);
+  animation: letterFloat 4s ease-in-out infinite;
+}
+
+.letter-stage {
+  position: relative;
+  width: 100%;
+  perspective: 1600px;
+  cursor: pointer;
+}
+
+.letter-image {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.letter-image--back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
+.letter-door {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 1200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 600ms ease 900ms;
+}
+
+.letter-door--left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.letter-door--right {
+  right: 0;
+  transform-origin: right center;
+}
+
+.letter-image--door {
+  width: 200%;
+  height: auto;
+  display: block;
+}
+
+.letter-door--left .letter-image--door {
+  margin-left: 0;
+  object-fit: cover;
+}
+
+.letter-door--right .letter-image--door {
+  margin-left: -100%;
+  object-fit: cover;
+}
+
+/* When opened: doors swing out and fade */
+.letter-stage--open .letter-door--left {
+  transform: rotateY(-105deg) translateX(-12px);
+  opacity: 0;
+}
+
+.letter-stage--open .letter-door--right {
+  transform: rotateY(105deg) translateX(12px);
+  opacity: 0;
+}
+
+/* The back image gets a subtle reveal glow */
+.letter-image--back {
+  opacity: 0.7;
+  transition: opacity 800ms ease 400ms, transform 800ms cubic-bezier(0.22, 1, 0.36, 1) 300ms;
+}
+
+.letter-stage--open .letter-image--back {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Stop floating when open */
+.letter-stage-wrapper.letter-stage--open,
+.letter-stage--open ~ .letter-stage-wrapper {
+  animation: none;
+}
+
+@keyframes letterFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.letter-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 32px;
+  background: radial-gradient(circle, rgba(255, 215, 100, 0.18), transparent 65%);
+  z-index: 0;
+  animation: letterGlow 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes letterGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(1.08); }
+}
+
+.letter-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 215, 100, 0.9);
+  box-shadow: 0 0 6px rgba(255, 210, 80, 0.8);
+  pointer-events: none;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+  50% { opacity: 1; transform: translateY(-12px) scale(1); }
+}
+
+.letter-hint {
+  animation: letterPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes letterPulse {
+  0%, 100% { opacity: 0.55; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+.lang-selector-enter {
+  animation: langSelectorEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes langSelectorEnter {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .animate-intro, .reveal, .gold-particle { animation: none; opacity: 1; transform: none; transition: none; }
+  .animate-intro, .reveal, .gold-particle, .letter-stage-wrapper, .letter-glow, .letter-sparkle, .letter-hint { animation: none; opacity: 1; transform: none; transition: none; }
 }
 
 @layer components {
@@ -184,6 +331,110 @@ body { margin: 0; min-width: 320px; background: #fbf4e6; }
 
   .form-control {
     @apply block w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-ink/40 focus:border-rose focus:ring-2 focus:ring-rose/20;
+  }
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  @keyframes float-up {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-100px); opacity: 0; }
+  }
+
+  .intro-container {
+    min-height: 100dvh;
+    width: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-wrapper {
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .video-wrapper video {
+    width: 105%;
+    height: 105%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .fallback-image {
+    width: 105%;
+    height: 105%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .tap-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #f4e8d8 0%, #ede1d1 50%, #e8dcc6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    cursor: pointer;
+  }
+
+  .tap-icon {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .language-selector-wrapper {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #f4e8d8 0%, #ede1d1 50%, #e8dcc6 100%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .language-selector-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .video-fade {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @media (max-width: 768px) {
+    .video-wrapper video,
+    .fallback-image {
+      width: 105%;
+      height: 105%;
+      object-fit: contain;
+      background: #000;
+    }
   }
 }
 

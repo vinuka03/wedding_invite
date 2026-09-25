@@ -62,7 +62,7 @@ export function Countdown({ labels }: { labels: CountdownLabels }) {
             <span className="block font-display text-2xl tabular-nums text-rose sm:text-4xl">{String(unit.value ?? 0).padStart(2, "0")}</span>
             <span className="mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-ink/60 sm:text-[0.65rem]">{unit.label}</span>
           </div>
-        ))}
+      ))}
       </div>
     </section>
   );
