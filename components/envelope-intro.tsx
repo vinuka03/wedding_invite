@@ -2,12 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Heart } from "lucide-react";
-import { LanguageSelector } from "./language-selector";
 import { startMusic } from "@/lib/music";
 
-export function EnvelopeIntro() {
+export function EnvelopeIntro({ onDone }: { onDone: () => void }) {
   const [showTapToOpen, setShowTapToOpen] = useState(true);
-  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,11 +17,11 @@ export function EnvelopeIntro() {
 
     const timer = setTimeout(() => {
       startMusic();
-      setShowLanguageSelector(true);
+      onDone();
     }, 12000);
 
     return () => clearTimeout(timer);
-  }, [showTapToOpen]);
+  }, [showTapToOpen, onDone]);
 
   const handleOpen = () => {
     setShowTapToOpen(false);
@@ -36,12 +34,12 @@ export function EnvelopeIntro() {
 
   const handleVideoEnd = () => {
     startMusic();
-    setShowLanguageSelector(true);
+    onDone();
   };
 
   const handleSkip = () => {
     startMusic();
-    setShowLanguageSelector(true);
+    onDone();
   };
 
   return (
@@ -60,7 +58,7 @@ export function EnvelopeIntro() {
             </div>
         )}
 
-        {!showTapToOpen && !showLanguageSelector && (
+        {!showTapToOpen && (
             <div className={`intro-container ${fadeIn ? "video-fade" : ""}`}>
               <div className="video-wrapper">
                 {!videoFailed ? (
@@ -94,13 +92,6 @@ export function EnvelopeIntro() {
             </div>
         )}
 
-        {showLanguageSelector && (
-            <div className="language-selector-wrapper">
-              <div className="language-selector-container">
-                <LanguageSelector />
-              </div>
-            </div>
-        )}
       </div>
   );
 }
